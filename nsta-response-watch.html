@@ -1,22 +1,25 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>NSTA Response Watch</title>
 
 <style>
+
 :root{
   --cream:#f4efe3;
   --paper:#fffdf7;
-  --ink:#1d2429;
-  --muted:#697078;
+  --ink:#20272b;
+  --muted:#70777b;
+  --line:#d8d0c1;
+
   --red:#87271b;
   --gold:#dca127;
   --blue:#1676bc;
   --green:#28b674;
-  --line:#d9d1c2;
-  --shadow:0 8px 24px rgba(29,36,41,.08);
+  --purple:#7567a8;
 }
 
 *{
@@ -27,58 +30,101 @@ body{
   margin:0;
   background:var(--cream);
   color:var(--ink);
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,
-  BlinkMacSystemFont,"Segoe UI",sans-serif;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
 header{
   background:var(--ink);
-  color:#fff;
-  padding:28px clamp(20px,5vw,64px);
-  border-bottom:6px solid var(--gold);
+  color:white;
+
+  padding:
+    30px
+    clamp(20px,5vw,65px);
+
+  border-bottom:
+    6px solid
+    var(--gold);
 }
 
 .eyebrow{
-  font:700 12px/1.2 monospace;
+  font-family:monospace;
+  font-size:12px;
+  font-weight:700;
+
   letter-spacing:.14em;
   text-transform:uppercase;
+
   color:var(--gold);
 }
 
 h1{
-  margin:7px 0 4px;
-  font-size:clamp(30px,5vw,54px);
-  letter-spacing:-.04em;
+  margin:
+    8px
+    0
+    5px;
+
+  font-size:
+    clamp(32px,5vw,55px);
+
+  letter-spacing:-.045em;
 }
 
 header p{
   margin:0;
-  color:#cbd0d3;
+
+  color:#cdd2d4;
 }
 
 main{
-  max-width:1300px;
+  max-width:1350px;
+
   margin:auto;
-  padding:28px clamp(16px,4vw,48px) 60px;
+
+  padding:
+    30px
+    clamp(16px,4vw,50px)
+    70px;
 }
 
 .toolbar{
   display:flex;
+
   justify-content:space-between;
-  gap:12px;
   align-items:center;
-  margin-bottom:24px;
+
+  gap:15px;
+
   flex-wrap:wrap;
+
+  margin-bottom:24px;
 }
 
 button{
   border:0;
+
   border-radius:8px;
-  padding:11px 15px;
-  font-weight:750;
-  cursor:pointer;
+
+  padding:
+    10px
+    14px;
+
   background:var(--ink);
+
   color:white;
+
+  font-weight:750;
+
+  cursor:pointer;
+}
+
+button:hover{
+  filter:brightness(.94);
 }
 
 button.primary{
@@ -87,84 +133,126 @@ button.primary{
 
 button.secondary{
   background:white;
+
   color:var(--ink);
-  border:1px solid var(--line);
+
+  border:
+    1px solid
+    var(--line);
 }
 
 button.danger{
-  background:#9d3325;
+  background:#9b3528;
 }
 
-.small{
-  padding:7px 10px;
+button.small{
+  padding:
+    7px
+    10px;
+
   font-size:12px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(12,1fr);
+
+  grid-template-columns:
+    repeat(12,1fr);
+
   gap:18px;
 }
 
 .panel{
   background:var(--paper);
-  border:1px solid var(--line);
+
+  border:
+    1px solid
+    var(--line);
+
   border-radius:14px;
+
   padding:20px;
-  box-shadow:var(--shadow);
+
+  box-shadow:
+    0 8px 24px
+    rgba(32,39,43,.07);
 }
 
 .waiting{
-  grid-column:span 12;
+  grid-column:
+    span 12;
 }
 
-.chart{
-  grid-column:span 8;
+.history{
+  grid-column:
+    span 8;
 }
 
 .milestones{
-  grid-column:span 4;
+  grid-column:
+    span 4;
 }
 
 .completed{
-  grid-column:span 12;
+  grid-column:
+    span 12;
 }
 
 .panel-head{
   display:flex;
+
   justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:16px;
+  align-items:flex-start;
+
+  gap:15px;
+
+  margin-bottom:18px;
 }
 
 .panel h2{
-  font-size:18px;
   margin:0;
+
+  font-size:18px;
 }
 
 .sub{
   color:var(--muted);
+
   font-size:13px;
+
+  margin-top:4px;
 }
 
 .cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(285px,1fr)
+    );
+
   gap:14px;
 }
 
 .card{
-  border:1px solid var(--line);
+  background:white;
+
+  border:
+    1px solid
+    var(--line);
+
   border-radius:12px;
+
   padding:16px;
-  background:#fff;
 }
 
 .card-top{
   display:flex;
+
   justify-content:space-between;
-  gap:12px;
+
+  gap:10px;
 }
 
 .org{
@@ -172,83 +260,210 @@ button.danger{
 }
 
 .matter{
-  font-size:13px;
   color:var(--muted);
+
+  font-size:13px;
+
   margin-top:3px;
 }
 
+.status{
+  white-space:nowrap;
+
+  border-radius:999px;
+
+  padding:
+    5px
+    8px;
+
+  background:#fff0cc;
+
+  color:#765400;
+
+  font-size:10px;
+
+  font-weight:800;
+}
+
+.status.awaiting{
+  background:#e8f2fb;
+
+  color:#155f94;
+}
+
 .timer{
-  font:800 clamp(25px,4vw,38px)/1.1
-    ui-monospace,SFMono-Regular,Menlo,monospace;
+  margin:
+    18px
+    0
+    7px;
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+
+  font-size:
+    clamp(25px,4vw,38px);
+
+  font-weight:800;
+
   letter-spacing:-.05em;
-  margin:18px 0 8px;
 }
 
 .waitline{
-  font-size:12px;
   color:var(--muted);
-}
 
-.status{
-  font-size:11px;
-  font-weight:800;
-  padding:5px 8px;
-  border-radius:999px;
-  background:#fff0cc;
-  color:#7b5700;
-  white-space:nowrap;
+  font-size:12px;
 }
 
 .card-actions{
   display:flex;
-  gap:7px;
-  margin-top:15px;
+
   flex-wrap:wrap;
+
+  gap:7px;
+
+  margin-top:15px;
 }
 
 .empty{
   padding:28px;
+
   text-align:center;
+
   color:var(--muted);
-  border:1px dashed var(--line);
+
+  border:
+    1px dashed
+    var(--line);
+
   border-radius:10px;
 }
 
-svg{
-  width:100%;
-  height:auto;
+
+/* HISTORY GRAPH */
+
+.history-scroll{
+  overflow-x:auto;
+
+  padding-bottom:5px;
+}
+
+#chart{
+  min-width:760px;
+}
+
+.chart-svg{
   display:block;
+
+  width:100%;
+
+  height:auto;
+
+  overflow:visible;
+}
+
+.event-label{
+  font-size:10px;
+
+  font-weight:800;
+
+  fill:var(--ink);
+
+  letter-spacing:.025em;
+}
+
+.event-label.small{
+  font-size:9px;
+}
+
+.event-line{
+  stroke:#899096;
+
+  stroke-width:1;
+
+  stroke-dasharray:2 2;
+}
+
+.event-dot{
+  stroke:var(--paper);
+
+  stroke-width:2;
+}
+
+.bar-bg{
+  fill:#eee8dc;
 }
 
 .legend{
   display:flex;
-  gap:14px;
+
   flex-wrap:wrap;
-  margin-top:12px;
+
+  gap:14px;
+
+  margin-top:14px;
+
   font-size:11px;
+
   color:var(--muted);
 }
 
-.dot{
-  display:inline-block;
-  width:9px;
-  height:9px;
-  border-radius:2px;
-  margin-right:5px;
+.legend-item{
+  display:flex;
+
+  align-items:center;
+
+  gap:5px;
 }
+
+.legend-box{
+  width:10px;
+  height:10px;
+
+  border-radius:2px;
+}
+
+.legend-wait{
+  background:
+    repeating-linear-gradient(
+      135deg,
+      #697078 0,
+      #697078 2px,
+      #f7f3e9 2px,
+      #f7f3e9 6px
+    );
+
+  border:
+    1px dashed
+    #697078;
+}
+
+
+/* MILESTONES */
 
 .timeline{
   display:flex;
+
   flex-direction:column;
-  gap:10px;
+
+  gap:11px;
 }
 
 .event{
   display:grid;
-  grid-template-columns:78px 1fr;
+
+  grid-template-columns:
+    78px 1fr;
+
   gap:10px;
-  border-bottom:1px solid #eee7da;
-  padding-bottom:10px;
+
+  padding-bottom:11px;
+
+  border-bottom:
+    1px solid
+    #eee8dc;
 }
 
 .event:last-child{
@@ -256,28 +471,52 @@ svg{
 }
 
 .event-date{
-  font:700 11px monospace;
   color:var(--muted);
+
+  font-family:monospace;
+
+  font-size:10px;
+
+  line-height:1.4;
 }
 
 .event-title{
-  font-weight:750;
   font-size:13px;
+
+  font-weight:750;
 }
 
 .event-note{
-  font-size:12px;
-  color:var(--muted);
   margin-top:2px;
+
+  color:var(--muted);
+
+  font-size:12px;
 }
+
+
+/* COMPLETED */
 
 .completed-row{
   display:grid;
-  grid-template-columns:1.5fr .8fr .8fr auto;
-  gap:14px;
+
+  grid-template-columns:
+    1.5fr
+    .8fr
+    .8fr
+    auto;
+
   align-items:center;
-  border-top:1px solid #eee7da;
-  padding:12px 0;
+
+  gap:15px;
+
+  padding:
+    12px
+    0;
+
+  border-top:
+    1px solid
+    #eee8dc;
 }
 
 .completed-row:first-child{
@@ -285,19 +524,31 @@ svg{
 }
 
 .resolve{
-  font-weight:800;
   color:var(--green);
+
+  font-weight:800;
 }
+
+
+/* MODAL */
 
 .modal{
   position:fixed;
+
   inset:0;
-  background:rgba(15,19,22,.55);
+
+  z-index:20;
+
   display:none;
+
   align-items:center;
+
   justify-content:center;
+
   padding:18px;
-  z-index:5;
+
+  background:
+    rgba(20,25,28,.58);
 }
 
 .modal.open{
@@ -305,157 +556,224 @@ svg{
 }
 
 .modal-box{
-  background:var(--paper);
-  width:min(720px,100%);
+  width:min(760px,100%);
+
   max-height:90vh;
+
   overflow:auto;
+
+  background:var(--paper);
+
   border-radius:16px;
+
   padding:22px;
-  box-shadow:0 20px 70px rgba(0,0,0,.25);
+
+  box-shadow:
+    0 20px 70px
+    rgba(0,0,0,.25);
 }
 
 .modal-head{
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
 }
 
-.modal h2{
+.modal-head h2{
   margin:0;
 }
 
 .close{
   background:transparent;
+
   color:var(--ink);
-  font-size:24px;
+
+  font-size:25px;
+
   padding:0;
 }
 
 label{
   display:block;
+
+  margin:
+    15px
+    0
+    6px;
+
   font-size:12px;
+
   font-weight:800;
-  margin:14px 0 6px;
 }
 
 input,
 select,
 textarea{
   width:100%;
-  border:1px solid var(--line);
-  border-radius:8px;
+
   padding:10px;
+
+  border:
+    1px solid
+    var(--line);
+
+  border-radius:8px;
+
   background:white;
+
   font:inherit;
 }
 
 textarea{
   min-height:80px;
+
   resize:vertical;
 }
 
-.two{
+.event-list{
+  margin-top:18px;
+}
+
+.event-row{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+
+  grid-template-columns:
+    150px
+    175px
+    1fr
+    auto;
+
+  gap:8px;
+
+  margin-top:8px;
+
+  align-items:center;
+}
+
+.event-row input,
+.event-row select{
+  font-size:12px;
+
+  padding:8px;
 }
 
 .form-actions{
   display:flex;
+
   justify-content:flex-end;
+
   gap:8px;
-  margin-top:18px;
+
+  margin-top:20px;
 }
 
-.event-list{
-  margin-top:16px;
-}
 
-.event-edit{
-  display:grid;
-  grid-template-columns:150px 160px 1fr auto;
-  gap:8px;
-  align-items:center;
-  margin-top:8px;
-}
+/* MOBILE */
 
-.event-edit input{
-  padding:8px;
-  font-size:12px;
-}
+@media(max-width:900px){
 
-@media(max-width:850px){
-
-  .chart,
+  .history,
   .milestones{
-    grid-column:span 12;
+    grid-column:
+      span 12;
   }
 
   .completed-row{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+      1fr 1fr;
   }
 
-  .two{
-    grid-template-columns:1fr;
-  }
-
-  .event-edit{
-    grid-template-columns:1fr 1fr;
-  }
 }
+
+@media(max-width:650px){
+
+  .event-row{
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
+
 <header>
+
   <div class="eyebrow">
     North Sydney Transport Association · Internal
   </div>
 
-  <h1>Response Watch</h1>
+  <h1>
+    Response Watch
+  </h1>
 
   <p>
-    Keep track of what NSTA is waiting on, when emails went out,
-    and what happened next.
+    Track correspondence, response times,
+    follow-ups and unresolved waiting periods.
   </p>
+
 </header>
 
 
 <main>
 
+
   <div class="toolbar">
 
     <div>
-      <strong id="count">0 active matters</strong>
-      <span class="sub"> · timers update live</span>
+
+      <strong id="count">
+        0 active matters
+      </strong>
+
+      <span class="sub">
+        · timers update live
+      </span>
+
     </div>
+
 
     <div>
 
       <button
         class="secondary"
         onclick="exportData()">
+
         Export
+
       </button>
+
 
       <button
         class="secondary"
         onclick="document.getElementById('importFile').click()">
+
         Import
+
       </button>
+
 
       <input
         id="importFile"
         type="file"
         accept=".json"
         hidden
-        onchange="importData(event)">
+        onchange="importData(event)"
+      >
+
 
       <button
         class="primary"
         onclick="openMatter()">
+
         + Add matter
+
       </button>
 
     </div>
@@ -463,23 +781,31 @@ textarea{
   </div>
 
 
+
   <div class="grid">
 
-    <!-- WAITING -->
+
+    <!-- CURRENTLY WAITING -->
 
     <section class="panel waiting">
 
       <div class="panel-head">
 
         <div>
-          <h2>Currently waiting</h2>
+
+          <h2>
+            Currently waiting
+          </h2>
 
           <div class="sub">
-            Time since the latest outgoing email
+            Matters where the latest action means
+            we're waiting on someone.
           </div>
+
         </div>
 
       </div>
+
 
       <div
         id="waitingCards"
@@ -489,28 +815,88 @@ textarea{
     </section>
 
 
-    <!-- CHART -->
 
-    <section class="panel chart">
+    <!-- HISTORY -->
+
+    <section class="panel history">
 
       <div class="panel-head">
 
         <div>
 
-          <h2>Response history</h2>
+          <h2>
+            Response history
+          </h2>
 
           <div class="sub">
-            Solid segments show completed time.
-            Dashed segments show current waiting time.
+            Event labels are anchored to the
+            exact point where each action occurred.
           </div>
 
         </div>
 
       </div>
 
-      <div id="chart"></div>
+
+      <div class="history-scroll">
+
+        <div id="chart"></div>
+
+      </div>
+
+
+      <div class="legend">
+
+        <div class="legend-item">
+
+          <span
+            class="legend-box"
+            style="background:#87271b">
+          </span>
+
+          Email / elapsed
+
+        </div>
+
+
+        <div class="legend-item">
+
+          <span
+            class="legend-box"
+            style="background:#1676bc">
+          </span>
+
+          Response
+
+        </div>
+
+
+        <div class="legend-item">
+
+          <span
+            class="legend-box"
+            style="background:#28b674">
+          </span>
+
+          Meeting
+
+        </div>
+
+
+        <div class="legend-item">
+
+          <span
+            class="legend-box legend-wait">
+          </span>
+
+          Currently waiting
+
+        </div>
+
+      </div>
 
     </section>
+
 
 
     <!-- MILESTONES -->
@@ -521,15 +907,18 @@ textarea{
 
         <div>
 
-          <h2>Recent milestones</h2>
+          <h2>
+            Recent milestones
+          </h2>
 
           <div class="sub">
-            Latest activity across NSTA correspondence
+            Latest activity
           </div>
 
         </div>
 
       </div>
+
 
       <div
         id="milestones"
@@ -537,6 +926,7 @@ textarea{
       </div>
 
     </section>
+
 
 
     <!-- COMPLETED -->
@@ -547,23 +937,29 @@ textarea{
 
         <div>
 
-          <h2>Completed</h2>
+          <h2>
+            Completed
+          </h2>
 
           <div class="sub">
-            Resolved matters and their total elapsed time
+            Resolved matters and total elapsed time.
           </div>
 
         </div>
 
       </div>
 
+
       <div id="completed"></div>
 
     </section>
 
+
   </div>
 
+
 </main>
+
 
 
 <!-- MODAL -->
@@ -572,7 +968,9 @@ textarea{
   id="modal"
   class="modal">
 
+
   <div class="modal-box">
+
 
     <div class="modal-head">
 
@@ -580,18 +978,23 @@ textarea{
         Add matter
       </h2>
 
+
       <button
         class="close"
         onclick="closeModal()">
+
         ×
+
       </button>
 
     </div>
 
 
+
     <input
       id="matterId"
-      type="hidden">
+      type="hidden"
+    >
 
 
     <label>
@@ -600,7 +1003,8 @@ textarea{
 
     <input
       id="org"
-      placeholder="e.g. Transport for NSW">
+      placeholder="e.g. Transport for NSW"
+    >
 
 
     <label>
@@ -609,7 +1013,8 @@ textarea{
 
     <input
       id="matter"
-      placeholder="e.g. 792N service review">
+      placeholder="e.g. 792N service review"
+    >
 
 
     <label>
@@ -622,34 +1027,49 @@ textarea{
     </textarea>
 
 
+
     <div class="event-list">
+
 
       <div class="panel-head">
 
         <div>
 
           <h3
-            style="margin:0;font-size:15px">
+            style="
+              margin:0;
+              font-size:15px;
+            ">
+
             Timeline
+
           </h3>
 
+
           <div class="sub">
-            Add the exact date and time for each event.
+            Enter the exact date and time
+            for each event.
           </div>
 
         </div>
 
+
         <button
           class="small secondary"
           onclick="addEventRow()">
+
           + Event
+
         </button>
 
       </div>
 
+
       <div id="eventRows"></div>
 
+
     </div>
+
 
 
     <div class="form-actions">
@@ -657,41 +1077,54 @@ textarea{
       <button
         class="secondary"
         onclick="closeModal()">
+
         Cancel
+
       </button>
+
 
       <button
         class="primary"
         onclick="saveMatter()">
+
         Save matter
+
       </button>
 
     </div>
+
 
   </div>
 
 </div>
 
 
+
 <script>
 
-const KEY = "nsta-response-watch-v2";
+
+const KEY =
+  "nsta-response-watch-v4";
+
 
 let matters =
-  JSON.parse(localStorage.getItem(KEY) || "[]");
+  JSON.parse(
+    localStorage.getItem(KEY)
+    || "[]"
+  );
 
 
 const TYPES = {
 
   sent:"Email sent",
 
-  followup:"Follow-up email",
+  followup:"Follow-up",
 
-  response:"Response received",
+  response:"Response",
 
   meeting:"Meeting",
 
-  call:"Phone call",
+  call:"Call",
 
   resolved:"Resolved",
 
@@ -710,18 +1143,20 @@ const COLORS = {
 
   meeting:"#28b674",
 
-  call:"#6f6a8a",
+  call:"#7567a8",
 
-  resolved:"#333",
+  resolved:"#333b3f",
 
-  other:"#9aa0a6"
+  other:"#899096"
 
 };
 
 
-/* ----------------------------------
-   BASIC HELPERS
----------------------------------- */
+
+/* -----------------------------
+   HELPERS
+----------------------------- */
+
 
 function save(){
 
@@ -731,75 +1166,94 @@ function save(){
   );
 
   render();
-}
-
-
-function esc(s=""){
-
-  return s.replace(
-    /[&<>"']/g,
-    m => ({
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#039;"
-    }[m])
-  );
 
 }
 
 
-function fmtDate(v){
+function esc(value=""){
 
-  return new Date(v).toLocaleDateString(
-    "en-AU",
-    {
-      day:"2-digit",
-      month:"short",
-      year:"numeric"
-    }
-  );
+  return String(value)
+    .replace(
+      /[&<>"']/g,
+      c => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+      }[c])
+    );
 
 }
 
 
-function fmtDateTime(v){
+function fmtDate(value){
 
-  return new Date(v).toLocaleString(
-    "en-AU",
-    {
-      day:"2-digit",
-      month:"short",
-      year:"numeric",
-      hour:"2-digit",
-      minute:"2-digit"
-    }
-  );
+  return new Date(value)
+    .toLocaleDateString(
+      "en-AU",
+      {
+        day:"2-digit",
+        month:"short",
+        year:"numeric"
+      }
+    );
+
+}
+
+
+function fmtDateTime(value){
+
+  return new Date(value)
+    .toLocaleString(
+      "en-AU",
+      {
+        day:"2-digit",
+        month:"short",
+        year:"numeric",
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    );
 
 }
 
 
 function duration(ms){
 
-  ms = Math.max(0,ms);
+  ms =
+    Math.max(
+      0,
+      ms
+    );
 
-  const s =
-    Math.floor(ms / 1000);
 
-  const d =
-    Math.floor(s / 86400);
+  const totalMinutes =
+    Math.floor(
+      ms / 60000
+    );
 
-  const h =
-    Math.floor((s % 86400) / 3600);
 
-  const m =
-    Math.floor((s % 3600) / 60);
+  const days =
+    Math.floor(
+      totalMinutes / 1440
+    );
+
+
+  const hours =
+    Math.floor(
+      (totalMinutes % 1440) / 60
+    );
+
+
+  const minutes =
+    totalMinutes % 60;
+
 
   return (
-    `${d}d ` +
-    `${String(h).padStart(2,"0")}h ` +
-    `${String(m).padStart(2,"0")}m`
+    `${days}d ` +
+    `${String(hours).padStart(2,"0")}h ` +
+    `${String(minutes).padStart(2,"0")}m`
   );
 
 }
@@ -807,7 +1261,9 @@ function duration(ms){
 
 function sortedEvents(m){
 
-  return [...m.events].sort(
+  return [
+    ...(m.events || [])
+  ].sort(
     (a,b) =>
       new Date(a.at) -
       new Date(b.at)
@@ -823,98 +1279,160 @@ function lastEvent(m){
 }
 
 
-function lastSent(m){
-
-  return sortedEvents(m)
-    .filter(
-      e =>
-        e.type === "sent" ||
-        e.type === "followup"
-    )
-    .at(-1);
-
-}
-
-
 function isResolved(m){
 
   return (
-    m.status === "resolved" ||
+    m.status === "resolved"
+    ||
     sortedEvents(m)
-      .some(e => e.type === "resolved")
+      .some(
+        e =>
+          e.type === "resolved"
+      )
   );
 
 }
 
 
-/* ----------------------------------
+/*
+  An outgoing action means NSTA has
+  sent something and is now waiting.
+*/
+
+function isOutgoing(type){
+
+  return (
+    type === "sent"
+    ||
+    type === "followup"
+  );
+
+}
+
+
+function isWaiting(m){
+
+  const ev =
+    sortedEvents(m);
+
+
+  if(!ev.length)
+    return false;
+
+
+  /*
+    If the latest event is outgoing,
+    we're waiting for someone.
+
+    If the latest event is a response,
+    meeting, call, etc., we're not
+    currently waiting.
+  */
+
+  return (
+    !isResolved(m)
+    &&
+    isOutgoing(
+      ev.at(-1).type
+    )
+  );
+
+}
+
+
+function waitingSince(m){
+
+  const ev =
+    sortedEvents(m);
+
+
+  if(
+    !ev.length
+    ||
+    !isWaiting(m)
+  )
+    return null;
+
+
+  return ev.at(-1);
+
+}
+
+
+
+/* -----------------------------
    MODAL
----------------------------------- */
+----------------------------- */
+
 
 function openMatter(id=null){
 
-  document.getElementById(
-    "modalTitle"
-  ).textContent =
-    id ? "Edit matter" : "Add matter";
+  document
+    .getElementById("modalTitle")
+    .textContent =
+      id
+        ? "Edit matter"
+        : "Add matter";
 
 
-  document.getElementById(
-    "matterId"
-  ).value =
-    id || "";
+  document
+    .getElementById("matterId")
+    .value =
+      id || "";
 
 
   const m =
     matters.find(
-      x => x.id === id
+      x =>
+        x.id === id
     );
 
 
-  document.getElementById(
-    "org"
-  ).value =
-    m?.org || "";
+  document
+    .getElementById("org")
+    .value =
+      m?.org || "";
 
 
-  document.getElementById(
-    "matter"
-  ).value =
-    m?.matter || "";
+  document
+    .getElementById("matter")
+    .value =
+      m?.matter || "";
 
 
-  document.getElementById(
-    "notes"
-  ).value =
-    m?.notes || "";
+  document
+    .getElementById("notes")
+    .value =
+      m?.notes || "";
 
 
-  document.getElementById(
-    "eventRows"
-  ).innerHTML = "";
+  document
+    .getElementById("eventRows")
+    .innerHTML =
+      "";
 
 
-  (
-    m?.events || []
-  )
-    .sort(
-      (a,b) =>
-        new Date(a.at) -
-        new Date(b.at)
-    )
-    .forEach(
-      e => addEventRow(e)
-    );
+  if(m){
 
+    sortedEvents(m)
+      .forEach(
+        e =>
+          addEventRow(e)
+      );
 
-  if(!m){
+  }else{
 
     addEventRow({
+
       type:"sent",
-      at:new Date()
-        .toISOString()
-        .slice(0,16),
+
+      at:
+        new Date()
+          .toISOString()
+          .slice(0,16),
+
       note:""
+
     });
 
   }
@@ -938,77 +1456,102 @@ function closeModal(){
 }
 
 
-/* ----------------------------------
-   EVENT ROWS
----------------------------------- */
+
+/* -----------------------------
+   EVENT ROW
+----------------------------- */
+
 
 function addEventRow(
-  e = {
+  event={
     type:"sent",
-    at:new Date()
-      .toISOString()
-      .slice(0,16),
+
+    at:
+      new Date()
+        .toISOString()
+        .slice(0,16),
+
     note:""
   }
 ){
 
   const d =
-    new Date(e.at);
+    new Date(
+      event.at
+    );
 
 
   const local =
     new Date(
-      d.getTime() -
-      d.getTimezoneOffset() * 60000
+      d.getTime()
+      -
+      d.getTimezoneOffset()
+      * 60000
     )
       .toISOString()
       .slice(0,16);
 
 
   const row =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
 
   row.className =
-    "event-edit";
+    "event-row";
 
 
   row.innerHTML = `
 
-    <select class="etype">
+    <select class="event-type">
 
-      ${Object.entries(TYPES)
-        .map(
-          ([k,v]) =>
-            `
+      ${
+        Object.entries(TYPES)
+          .map(
+            ([key,label]) =>
+              `
               <option
-                value="${k}"
-                ${k === e.type ? "selected" : ""}>
-                ${v}
+                value="${key}"
+                ${
+                  key === event.type
+                    ? "selected"
+                    : ""
+                }>
+
+                ${label}
+
               </option>
-            `
-        )
-        .join("")}
+              `
+          )
+          .join("")
+      }
 
     </select>
 
 
     <input
-      class="edate"
+      class="event-date"
       type="datetime-local"
-      value="${local}">
+      value="${local}"
+    >
 
 
     <input
-      class="enote"
+      class="event-note"
       placeholder="What happened?"
-      value="${esc(e.note || "")}">
+      value="${esc(event.note || "")}"
+    >
 
 
     <button
       class="small danger"
-      onclick="this.parentElement.remove()">
+      onclick="
+        this.parentElement.remove()
+      ">
+
       ×
+
     </button>
 
   `;
@@ -1021,9 +1564,11 @@ function addEventRow(
 }
 
 
-/* ----------------------------------
-   SAVE MATTER
----------------------------------- */
+
+/* -----------------------------
+   SAVE
+----------------------------- */
+
 
 function saveMatter(){
 
@@ -1044,7 +1589,7 @@ function saveMatter(){
   if(!org || !matter){
 
     alert(
-      "Add an organisation and matter."
+      "Please enter an organisation and matter."
     );
 
     return;
@@ -1052,53 +1597,63 @@ function saveMatter(){
   }
 
 
-  const events = [
-
-    ...document
-      .querySelectorAll(".event-edit")
-
-  ]
-
-    .map(row => ({
-
-      type:
-        row
-          .querySelector(".etype")
-          .value,
-
-      at:
-        new Date(
-          row
-            .querySelector(".edate")
-            .value
-        ).toISOString(),
-
-      note:
-        row
-          .querySelector(".enote")
-          .value
-          .trim()
-
-    }))
-
-    .filter(
-      e =>
-        !isNaN(
-          new Date(e.at)
+  const events =
+    [
+      ...document
+        .querySelectorAll(
+          ".event-row"
         )
-    );
+    ]
+      .map(
+        row => ({
+
+          type:
+            row
+              .querySelector(
+                ".event-type"
+              )
+              .value,
+
+          at:
+            new Date(
+              row
+                .querySelector(
+                  ".event-date"
+                )
+                .value
+            ).toISOString(),
+
+          note:
+            row
+              .querySelector(
+                ".event-note"
+              )
+              .value
+              .trim()
+
+        })
+      )
+      .sort(
+        (a,b) =>
+          new Date(a.at) -
+          new Date(b.at)
+      );
 
 
   const id =
     document
-      .getElementById("matterId")
-      .value ||
-    crypto.randomUUID();
+      .getElementById(
+        "matterId"
+      )
+      .value
+      ||
+      crypto.randomUUID();
 
 
   const existing =
     matters.find(
-      m => m.id === id
+      m =>
+        m.id === id
     );
 
 
@@ -1120,13 +1675,15 @@ function saveMatter(){
 
     status:
       events.some(
-        e => e.type === "resolved"
+        e =>
+          e.type === "resolved"
       )
         ? "resolved"
         : "active",
 
     createdAt:
-      existing?.createdAt ||
+      existing?.createdAt
+      ||
       new Date().toISOString()
 
   };
@@ -1156,282 +1713,39 @@ function saveMatter(){
 }
 
 
-/* ----------------------------------
-   DELETE
----------------------------------- */
 
-function deleteMatter(id){
+/* -----------------------------
+   WAITING
+----------------------------- */
 
-  if(
-    confirm(
-      "Delete this matter? This cannot be undone unless you exported it."
-    )
-  ){
-
-    matters =
-      matters.filter(
-        m => m.id !== id
-      );
-
-    save();
-
-  }
-
-}
-
-
-/* ----------------------------------
-   QUICK EVENT
----------------------------------- */
-
-function addQuick(id){
-
-  openMatter(id);
-
-  setTimeout(
-    () =>
-      addEventRow({
-        type:"other",
-        at:new Date()
-          .toISOString()
-          .slice(0,16),
-        note:""
-      }),
-    50
-  );
-
-}
-
-
-/* ----------------------------------
-   MAIN RENDER
----------------------------------- */
-
-function render(){
-
-  const active =
-    matters.filter(
-      m => !isResolved(m)
-    );
-
-
-  document.getElementById(
-    "count"
-  ).textContent =
-    `${active.length} active ${
-      active.length === 1
-        ? "matter"
-        : "matters"
-    }`;
-
-
-  renderWaiting();
-
-  renderChart();
-
-  renderMilestones();
-
-  renderCompleted();
-
-}
-
-
-/* ----------------------------------
-   WAITING CARDS
----------------------------------- */
 
 function renderWaiting(){
 
   const active =
     matters.filter(
-      m => !isResolved(m)
+      isWaiting
     );
-
-
-  const wc =
-    document.getElementById(
-      "waitingCards"
-    );
-
-
-  wc.innerHTML = "";
-
-
-  active.forEach(m => {
-
-    const sent =
-      lastSent(m);
-
-
-    const card =
-      document.createElement("div");
-
-
-    card.className =
-      "card";
-
-
-    const wait =
-      sent
-        ? duration(
-            Date.now() -
-            new Date(sent.at)
-          )
-        : null;
-
-
-    card.innerHTML = `
-
-      <div class="card-top">
-
-        <div>
-
-          <div class="org">
-            ${esc(m.org)}
-          </div>
-
-          <div class="matter">
-            ${esc(m.matter)}
-          </div>
-
-        </div>
-
-
-        <span class="status">
-
-          ${sent
-            ? "WAITING"
-            : "NO EMAIL"}
-
-        </span>
-
-      </div>
-
-
-      <div class="timer">
-
-        ${sent ? wait : "—"}
-
-      </div>
-
-
-      <div class="waitline">
-
-        ${
-          sent
-            ? "Since " +
-              fmtDateTime(sent.at)
-            : "Add an outgoing email to start the timer."
-        }
-
-      </div>
-
-
-      <div class="card-actions">
-
-        <button
-          class="small"
-          onclick="openMatter('${m.id}')">
-
-          Open timeline
-
-        </button>
-
-
-        <button
-          class="small secondary"
-          onclick="addQuick('${m.id}')">
-
-          + Event
-
-        </button>
-
-
-        <button
-          class="small secondary"
-          onclick="deleteMatter('${m.id}')">
-
-          Delete
-
-        </button>
-
-      </div>
-
-    `;
-
-
-    wc.appendChild(card);
-
-  });
-
-
-  if(!active.length){
-
-    wc.innerHTML = `
-
-      <div class="empty">
-
-        Nothing currently waiting.
-        Add a matter to start a timer.
-
-      </div>
-
-    `;
-
-  }
-
-}
-
-
-/* ----------------------------------
-   STACKED RESPONSE CHART
----------------------------------- */
-
-function renderChart(){
-
-  /*
-    IMPORTANT:
-
-    Completed matters:
-      solid segments
-
-    Unresolved matters:
-      solid historical segments
-      +
-      dashed/hatched segment from
-      latest outgoing email to NOW
-  */
-
-
-  const all =
-    matters
-      .slice()
-      .sort(
-        (a,b) =>
-          new Date(
-            (lastEvent(b) || {}).at || 0
-          ) -
-          new Date(
-            (lastEvent(a) || {}).at || 0
-          )
-      )
-      .slice(0,10);
 
 
   const el =
-    document.getElementById(
-      "chart"
-    );
+    document
+      .getElementById(
+        "waitingCards"
+      );
 
 
-  if(!all.length){
+  if(!active.length){
 
     el.innerHTML = `
 
       <div class="empty">
 
-        Add some matters to build
-        the response-time chart.
+        Nothing currently waiting.
+
+        <br>
+
+        A matter only appears here when
+        the latest event is an outgoing email.
 
       </div>
 
@@ -1442,58 +1756,211 @@ function renderChart(){
   }
 
 
-  const W = 800;
+  el.innerHTML =
+    active
+      .map(
+        m => {
+
+          const event =
+            waitingSince(m);
+
+
+          const elapsed =
+            Date.now()
+            -
+            new Date(
+              event.at
+            );
+
+
+          return `
+
+            <div class="card">
+
+              <div class="card-top">
+
+                <div>
+
+                  <div class="org">
+                    ${esc(m.org)}
+                  </div>
+
+                  <div class="matter">
+                    ${esc(m.matter)}
+                  </div>
+
+                </div>
+
+
+                <span class="status">
+
+                  WAITING
+
+                </span>
+
+              </div>
+
+
+              <div class="timer">
+
+                ${duration(elapsed)}
+
+              </div>
+
+
+              <div class="waitline">
+
+                Since
+                ${fmtDateTime(event.at)}
+
+              </div>
+
+
+              <div class="card-actions">
+
+                <button
+                  class="small"
+                  onclick="
+                    openMatter('${m.id}')
+                  ">
+
+                  Open timeline
+
+                </button>
+
+
+                <button
+                  class="small secondary"
+                  onclick="
+                    deleteMatter('${m.id}')
+                  ">
+
+                  Delete
+
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+
+/* -----------------------------
+   HISTORY GRAPH
+----------------------------- */
+
+
+function renderChart(){
+
+  const mattersForChart =
+    matters
+      .slice()
+      .sort(
+        (a,b) => {
+
+          const ae =
+            lastEvent(a);
+
+          const be =
+            lastEvent(b);
+
+          return (
+            new Date(be?.at || 0)
+            -
+            new Date(ae?.at || 0)
+          );
+
+        }
+      )
+      .slice(0,10);
+
+
+  const chart =
+    document
+      .getElementById(
+        "chart"
+      );
+
+
+  if(!mattersForChart.length){
+
+    chart.innerHTML = `
+
+      <div class="empty">
+
+        Add some matters to build
+        the response history.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const W = 1000;
+
+  const rowHeight = 92;
+
+  const top = 62;
+
+  const bottom = 40;
+
+  const left = 190;
+
+  const right = 65;
 
   const H =
-    Math.max(
-      210,
-      all.length * 48 + 55
-    );
-
-  const left = 185;
-
-  const right = 55;
-
-  const top = 25;
-
-  const bottom = 35;
-
-  const barH = 24;
-
-  const innerW =
-    W - left - right;
+    top
+    +
+    mattersForChart.length
+    *
+    rowHeight
+    +
+    bottom;
 
 
   /*
-    Work out the longest total duration
-    so all bars share the same scale.
+    Calculate total duration for
+    every matter.
   */
 
   const totals =
-    all.map(m => {
+    mattersForChart.map(
+      m => {
 
-      const ev =
-        sortedEvents(m);
+        const ev =
+          sortedEvents(m);
 
+        if(!ev.length)
+          return 0;
 
-      if(!ev.length)
-        return 0;
+        const start =
+          new Date(
+            ev[0].at
+          );
 
+        const end =
+          isResolved(m)
+            ? new Date(
+                ev.at(-1).at
+              )
+            : new Date();
 
-      const end =
-        isResolved(m)
-          ? new Date(
-              ev.at(-1).at
-            )
-          : new Date();
+        return end - start;
 
-
-      return (
-        end -
-        new Date(ev[0].at)
-      );
-
-    });
+      }
+    );
 
 
   const maxMs =
@@ -1506,39 +1973,37 @@ function renderChart(){
   let svg = `
 
     <svg
-      viewBox="0 0 ${W} ${H}"
-      role="img"
-      aria-label="Stacked response time chart">
-
+      class="chart-svg"
+      viewBox="
+        0 0 ${W} ${H}
+      "
+      preserveAspectRatio="xMinYMin meet"
+    >
 
       <defs>
 
-        <!--
-          Hatch pattern for currently
-          unresolved waiting time.
-        -->
-
         <pattern
-          id="waitHatch"
+          id="waitingPattern"
           patternUnits="userSpaceOnUse"
-          width="10"
-          height="10"
-          patternTransform="rotate(45)">
+          width="9"
+          height="9"
+          patternTransform="rotate(45)"
+        >
 
           <rect
-            width="10"
-            height="10"
-            fill="#f7f3e9">
-          </rect>
+            width="9"
+            height="9"
+            fill="#f7f3e9"
+          />
 
           <line
             x1="0"
             y1="0"
             x2="0"
-            y2="10"
+            y2="9"
             stroke="#697078"
-            stroke-width="3">
-          </line>
+            stroke-width="3"
+          />
 
         </pattern>
 
@@ -1547,176 +2012,151 @@ function renderChart(){
   `;
 
 
-  all.forEach((m,i) => {
 
-    const ev =
-      sortedEvents(m);
+  mattersForChart.forEach(
+    (m,index) => {
 
-
-    if(!ev.length)
-      return;
+      const events =
+        sortedEvents(m);
 
 
-    const y =
-      top +
-      i * 48;
+      if(!events.length)
+        return;
 
 
-    const firstTime =
-      new Date(
-        ev[0].at
-      );
+      const y =
+        top
+        +
+        index
+        *
+        rowHeight;
 
 
-    /*
-      Organisation label
-    */
-
-    svg += `
-
-      <text
-        x="${left - 10}"
-        y="${y + 17}"
-        text-anchor="end"
-        font-size="11"
-        font-weight="700">
-
-        ${esc(
-          m.org.slice(0,25)
-        )}
-
-      </text>
-
-    `;
+      const barY =
+        y + 30;
 
 
-    /*
-      SOLID HISTORICAL SEGMENTS
-    */
-
-    for(
-      let j = 0;
-      j < ev.length - 1;
-      j++
-    ){
-
-      const a =
+      const start =
         new Date(
-          ev[j].at
+          events[0].at
         );
 
 
-      const b =
-        new Date(
-          ev[j + 1].at
-        );
+      const end =
+        isResolved(m)
+          ? new Date(
+              events.at(-1).at
+            )
+          : new Date();
 
 
-      const ms =
-        b - a;
+      const total =
+        end - start;
 
 
-      const x =
-        left +
-        (
-          (a - firstTime) /
-          maxMs
-        ) *
-        innerW;
+      const scale =
+        (W-left-right)
+        /
+        maxMs;
 
 
-      const width =
+      /*
+        Organisation name
+      */
+
+      svg += `
+
+        <text
+          x="${left-14}"
+          y="${barY+17}"
+          text-anchor="end"
+          font-size="12"
+          font-weight="800"
+          fill="#20272b"
+        >
+
+          ${esc(
+            m.org.length > 27
+              ? m.org.slice(0,27) + "…"
+              : m.org
+          )}
+
+        </text>
+
+      `;
+
+
+      /*
+        Background bar
+      */
+
+      const totalWidth =
         Math.max(
-          2,
-          (ms / maxMs) *
-          innerW
+          8,
+          total * scale
         );
-
-
-      const fill =
-        COLORS[
-          ev[j + 1].type
-        ] ||
-        COLORS.other;
 
 
       svg += `
 
         <rect
-          x="${x.toFixed(1)}"
-          y="${y}"
-          width="${width.toFixed(1)}"
-          height="${barH}"
-          rx="3"
-          fill="${fill}">
-
-          <title>
-
-            ${
-              TYPES[
-                ev[j + 1].type
-              ]
-            }:
-            ${duration(ms)}
-
-          </title>
-
-        </rect>
+          class="bar-bg"
+          x="${left}"
+          y="${barY}"
+          width="${totalWidth}"
+          height="24"
+          rx="4"
+        />
 
       `;
 
-    }
 
+      /*
+        SOLID SEGMENTS
 
-    /*
-      DASHED CURRENT WAIT
+        Each segment runs from one
+        event to the next.
+      */
 
-      This is the important bit.
+      for(
+        let i=0;
+        i<events.length-1;
+        i++
+      ){
 
-      We find the latest outgoing email
-      or follow-up, then draw from that
-      exact point to NOW.
-    */
+        const current =
+          events[i];
 
-    if(!isResolved(m)){
+        const next =
+          events[i+1];
 
-      const sent =
-        lastSent(m);
-
-
-      if(sent){
 
         const a =
           new Date(
-            sent.at
+            current.at
           );
 
 
         const b =
-          new Date();
-
-
-        const ms =
-          Math.max(
-            0,
-            b - a
+          new Date(
+            next.at
           );
 
 
         const x =
-          left +
-          (
-            (a - firstTime) /
-            maxMs
-          ) *
-          innerW;
+          left
+          +
+          (a-start)
+          *
+          scale;
 
 
         const width =
           Math.max(
-            3,
-            (ms / maxMs) *
-            innerW
+            2,
+            (b-a)
+            *
+            scale
           );
 
 
@@ -1724,28 +2164,37 @@ function renderChart(){
 
           <rect
 
-            x="${x.toFixed(1)}"
+            x="${x.toFixed(2)}"
 
-            y="${y}"
+            y="${barY}"
 
-            width="${width.toFixed(1)}"
+            width="${width.toFixed(2)}"
 
-            height="${barH}"
+            height="24"
 
             rx="3"
 
-            fill="url(#waitHatch)"
+            fill="${
+              COLORS[
+                next.type
+              ]
+              ||
+              COLORS.other
+            }"
 
-            stroke="#697078"
-
-            stroke-width="1.5"
-
-            stroke-dasharray="5 4">
+          >
 
             <title>
 
-              Currently waiting:
-              ${duration(ms)}
+              ${
+                TYPES[
+                  next.type
+                ]
+              }
+
+              ·
+
+              ${duration(b-a)}
 
             </title>
 
@@ -1755,47 +2204,382 @@ function renderChart(){
 
       }
 
+
+      /*
+        CURRENT WAITING
+
+        Only the latest outgoing
+        event becomes dashed.
+
+        If the latest event is a response,
+        meeting, call etc., there is no
+        dashed section.
+      */
+
+      if(isWaiting(m)){
+
+        const waiting =
+          waitingSince(m);
+
+
+        const a =
+          new Date(
+            waiting.at
+          );
+
+
+        const x =
+          left
+          +
+          (a-start)
+          *
+          scale;
+
+
+        const width =
+          Math.max(
+            3,
+            (end-a)
+            *
+            scale
+          );
+
+
+        svg += `
+
+          <rect
+
+            x="${x.toFixed(2)}"
+
+            y="${barY}"
+
+            width="${width.toFixed(2)}"
+
+            height="24"
+
+            rx="3"
+
+            fill="url(#waitingPattern)"
+
+            stroke="#697078"
+
+            stroke-width="1"
+
+            stroke-dasharray="5 4"
+
+          >
+
+            <title>
+
+              Currently waiting ·
+              ${duration(end-a)}
+
+            </title>
+
+          </rect>
+
+        `;
+
+      }
+
+
+      /*
+        EVENT LABELS
+
+        THIS is the key change.
+
+        Every label is positioned above
+        the exact x-coordinate of the
+        corresponding event.
+      */
+
+      events.forEach(
+        (event,eventIndex) => {
+
+          const eventTime =
+            new Date(
+              event.at
+            );
+
+
+          const x =
+            left
+            +
+            (eventTime-start)
+            *
+            scale;
+
+
+          let label =
+            TYPES[
+              event.type
+            ]
+            ||
+            "Event";
+
+
+          /*
+            Make the first event slightly
+            more explicit.
+          */
+
+          if(
+            eventIndex === 0
+            &&
+            event.type === "sent"
+          ){
+
+            label =
+              "EMAIL SENT";
+
+          }else{
+
+            label =
+              label.toUpperCase();
+
+          }
+
+
+          /*
+            If labels are close together,
+            alternate their vertical position
+            so they don't pile on top of one
+            another.
+          */
+
+          const previous =
+            events[eventIndex-1];
+
+
+          let labelY =
+            y + 13;
+
+
+          if(previous){
+
+            const previousX =
+              left
+              +
+              (
+                new Date(
+                  previous.at
+                )
+                -
+                start
+              )
+              *
+              scale;
+
+
+            if(
+              Math.abs(
+                x - previousX
+              ) < 90
+            ){
+
+              labelY =
+                y - 5;
+
+            }
+
+          }
+
+
+          /*
+            Keep the label inside the
+            chart's left/right boundaries.
+          */
+
+          let textAnchor =
+            "middle";
+
+
+          let labelX =
+            x;
+
+
+          if(x < left + 55){
+
+            textAnchor =
+              "start";
+
+            labelX =
+              left;
+
+          }
+
+
+          if(
+            x >
+            W-right-55
+          ){
+
+            textAnchor =
+              "end";
+
+            labelX =
+              W-right;
+
+          }
+
+
+          /*
+            Label
+          */
+
+          svg += `
+
+            <text
+
+              class="event-label"
+
+              x="${labelX.toFixed(2)}"
+
+              y="${labelY}"
+
+              text-anchor="${textAnchor}"
+
+            >
+
+              ${esc(label)}
+
+            </text>
+
+          `;
+
+
+          /*
+            Connector line from label
+            to the actual event point.
+          */
+
+          svg += `
+
+            <line
+
+              class="event-line"
+
+              x1="${x.toFixed(2)}"
+
+              y1="${labelY + 5}"
+
+              x2="${x.toFixed(2)}"
+
+              y2="${barY - 2}"
+
+            />
+
+          `;
+
+
+          /*
+            Event dot on the bar
+          */
+
+          svg += `
+
+            <circle
+
+              class="event-dot"
+
+              cx="${x.toFixed(2)}"
+
+              cy="${barY + 12}"
+
+              r="3.5"
+
+              fill="${
+                COLORS[
+                  event.type
+                ]
+                ||
+                COLORS.other
+              }"
+
+            >
+
+              <title>
+
+                ${
+                  TYPES[
+                    event.type
+                  ]
+                }
+
+                ·
+
+                ${fmtDateTime(event.at)}
+
+              </title>
+
+            </circle>
+
+          `;
+
+        }
+      );
+
+
+      /*
+        Total time
+      */
+
+      svg += `
+
+        <text
+
+          x="${
+            Math.min(
+              W-right,
+              left + totalWidth + 8
+            )
+          }"
+
+          y="${barY+17}"
+
+          font-size="10"
+
+          fill="#697078"
+
+        >
+
+          ${duration(total)}
+
+        </text>
+
+      `;
+
+
+      /*
+        Matter title below bar
+      */
+
+      svg += `
+
+        <text
+
+          x="${left}"
+
+          y="${barY+42}"
+
+          font-size="10"
+
+          fill="#70777b"
+
+        >
+
+          ${esc(
+            m.matter.length > 80
+              ? m.matter.slice(0,80) + "…"
+              : m.matter
+          )}
+
+        </text>
+
+      `;
+
     }
-
-
-    /*
-      Total duration at right
-    */
-
-    const end =
-      isResolved(m)
-        ? new Date(
-            ev.at(-1).at
-          )
-        : new Date();
-
-
-    const total =
-      end -
-      firstTime;
-
-
-    svg += `
-
-      <text
-
-        x="${W - right}"
-
-        y="${y + 17}"
-
-        text-anchor="end"
-
-        font-size="10"
-
-        fill="#697078">
-
-        ${duration(total)}
-
-      </text>
-
-    `;
-
-  });
+  );
 
 
   /*
@@ -1805,18 +2589,31 @@ function renderChart(){
   svg += `
 
     <line
+
       x1="${left}"
+
       x2="${W-right}"
+
       y1="${H-bottom}"
+
       y2="${H-bottom}"
-      stroke="#d9d1c2"/>
+
+      stroke="#d8d0c1"
+
+    />
 
 
     <text
+
       x="${left}"
-      y="${H-10}"
+
+      y="${H-12}"
+
       font-size="10"
-      fill="#697078">
+
+      fill="#70777b"
+
+    >
 
       Matter started
 
@@ -1824,233 +2621,236 @@ function renderChart(){
 
 
     <text
+
       x="${W-right}"
-      y="${H-10}"
+
+      y="${H-12}"
+
       text-anchor="end"
+
       font-size="10"
-      fill="#697078">
+
+      fill="#70777b"
+
+    >
 
       Now / resolved
 
     </text>
 
-
-    </svg>
-
   `;
 
 
-  /*
-    Legend
-  */
-
-  el.innerHTML =
-    svg +
-
-    `
-
-      <div class="legend">
-
-        <span>
-
-          <i
-            class="dot"
-            style="
-              background:${COLORS.sent}
-            ">
-          </i>
-
-          Completed
-
-        </span>
+  svg += `
+    </svg>
+  `;
 
 
-        <span>
-
-          <i
-            class="dot"
-            style="
-              background:#f7f3e9;
-              border:1px dashed #697078;
-            ">
-          </i>
-
-          Currently waiting
-
-        </span>
-
-      </div>
-
-    `;
+  chart.innerHTML =
+    svg;
 
 }
 
 
-/* ----------------------------------
-   RECENT MILESTONES
----------------------------------- */
+
+/* -----------------------------
+   MILESTONES
+----------------------------- */
+
 
 function renderMilestones(){
 
-  const all =
-
+  const events =
     matters
-
       .flatMap(
         m =>
-          m.events.map(
-            e => ({
-              ...e,
-              org:m.org,
-              matter:m.matter
-            })
-          )
+          sortedEvents(m)
+            .map(
+              e => ({
+                ...e,
+                org:m.org,
+                matter:m.matter
+              })
+            )
       )
-
       .sort(
         (a,b) =>
-          new Date(b.at) -
+          new Date(b.at)
+          -
           new Date(a.at)
       )
-
       .slice(0,10);
 
 
   const el =
-    document.getElementById(
-      "milestones"
-    );
+    document
+      .getElementById(
+        "milestones"
+      );
+
+
+  if(!events.length){
+
+    el.innerHTML = `
+
+      <div class="empty">
+        No milestones yet.
+      </div>
+
+    `;
+
+    return;
+
+  }
 
 
   el.innerHTML =
-    all.length
+    events
+      .map(
+        e => `
 
-      ? all.map(
-          e => `
+          <div class="event">
 
-            <div class="event">
+            <div class="event-date">
 
-              <div class="event-date">
+              ${fmtDate(e.at)}
 
-                ${fmtDate(e.at)}
+              <br>
 
-                <br>
+              ${
+                new Date(e.at)
+                  .toLocaleTimeString(
+                    "en-AU",
+                    {
+                      hour:"2-digit",
+                      minute:"2-digit"
+                    }
+                  )
+              }
 
-                ${
-                  new Date(e.at)
-                    .toLocaleTimeString(
-                      "en-AU",
-                      {
-                        hour:"2-digit",
-                        minute:"2-digit"
-                      }
-                    )
-                }
+            </div>
+
+
+            <div>
+
+              <div class="event-title">
+
+                ${esc(
+                  TYPES[e.type]
+                )}
+
+                ·
+
+                ${esc(e.org)}
 
               </div>
 
 
-              <div>
+              <div class="event-note">
 
-                <div class="event-title">
-
-                  ${esc(TYPES[e.type])}
-
-                  ·
-
-                  ${esc(e.org)}
-
-                </div>
-
-
-                <div class="event-note">
-
-                  ${esc(
-                    e.note ||
-                    e.matter
-                  )}
-
-                </div>
+                ${esc(
+                  e.note
+                  ||
+                  e.matter
+                )}
 
               </div>
 
             </div>
 
-          `
-        ).join("")
-
-      :
-
-        `
-
-          <div class="empty">
-
-            No milestones yet.
-
           </div>
 
-        `;
+        `
+      )
+      .join("");
 
 }
 
 
-/* ----------------------------------
+
+/* -----------------------------
    COMPLETED
----------------------------------- */
+----------------------------- */
+
 
 function renderCompleted(){
 
-  const done =
-
+  const completed =
     matters
-
-      .filter(isResolved)
-
+      .filter(
+        isResolved
+      )
       .sort(
         (a,b) =>
           new Date(
-            (lastEvent(b)||{}).at || 0
-          ) -
-
+            lastEvent(b)?.at || 0
+          )
+          -
           new Date(
-            (lastEvent(a)||{}).at || 0
+            lastEvent(a)?.at || 0
           )
       );
 
 
   const el =
-    document.getElementById(
-      "completed"
-    );
+    document
+      .getElementById(
+        "completed"
+      );
+
+
+  if(!completed.length){
+
+    el.innerHTML = `
+
+      <div class="empty">
+
+        No completed matters yet.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
 
 
   el.innerHTML =
-
-    done.length
-
-      ? done.map(m => {
+    completed
+      .map(
+        m => {
 
           const ev =
             sortedEvents(m);
 
 
-          const first =
+          const start =
             ev[0];
 
 
-          const end =
+          const resolved =
             ev.find(
               e =>
-                e.type ===
-                "resolved"
-            ) ||
+                e.type === "resolved"
+            )
+            ||
             ev.at(-1);
+
+
+          const total =
+            new Date(
+              resolved.at
+            )
+            -
+            new Date(
+              start.at
+            );
 
 
           return `
 
-            <div
-              class="completed-row">
+            <div class="completed-row">
 
 
               <div>
@@ -2074,17 +2874,17 @@ function renderCompleted(){
               <div>
 
                 ${
-                  first
-                    ? fmtDate(first.at)
-                    : "—"
+                  fmtDate(
+                    start.at
+                  )
                 }
 
                 →
 
                 ${
-                  end
-                    ? fmtDate(end.at)
-                    : "—"
+                  fmtDate(
+                    resolved.at
+                  )
                 }
 
               </div>
@@ -2093,12 +2893,7 @@ function renderCompleted(){
               <div class="resolve">
 
                 ${
-                  first && end
-                    ? duration(
-                        new Date(end.at) -
-                        new Date(first.at)
-                      )
-                    : "—"
+                  duration(total)
                 }
 
               </div>
@@ -2108,7 +2903,9 @@ function renderCompleted(){
 
                 <button
                   class="small secondary"
-                  onclick="openMatter('${m.id}')">
+                  onclick="
+                    openMatter('${m.id}')
+                  ">
 
                   Open
 
@@ -2121,26 +2918,46 @@ function renderCompleted(){
 
           `;
 
-        }).join("")
-
-      :
-
-        `
-
-          <div class="empty">
-
-            No completed matters yet.
-
-          </div>
-
-        `;
+        }
+      )
+      .join("");
 
 }
 
 
-/* ----------------------------------
+
+/* -----------------------------
+   DELETE
+----------------------------- */
+
+
+function deleteMatter(id){
+
+  if(
+    !confirm(
+      "Delete this matter?"
+    )
+  )
+    return;
+
+
+  matters =
+    matters.filter(
+      m =>
+        m.id !== id
+    );
+
+
+  save();
+
+}
+
+
+
+/* -----------------------------
    EXPORT
----------------------------------- */
+----------------------------- */
+
 
 function exportData(){
 
@@ -2154,17 +2971,26 @@ function exportData(){
         )
       ],
       {
-        type:"application/json"
+        type:
+          "application/json"
       }
     );
 
 
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
   const a =
-    document.createElement("a");
+    document.createElement(
+      "a"
+    );
 
 
   a.href =
-    URL.createObjectURL(blob);
+    url;
 
 
   a.download =
@@ -2175,20 +3001,22 @@ function exportData(){
 
 
   URL.revokeObjectURL(
-    a.href
+    url
   );
 
 }
 
 
-/* ----------------------------------
-   IMPORT
----------------------------------- */
 
-function importData(ev){
+/* -----------------------------
+   IMPORT
+----------------------------- */
+
+
+function importData(event){
 
   const file =
-    ev.target.files[0];
+    event.target.files[0];
 
 
   if(!file)
@@ -2199,43 +3027,44 @@ function importData(ev){
     new FileReader();
 
 
-  reader.onload = () => {
+  reader.onload =
+    () => {
 
-    try{
+      try{
 
-      const x =
-        JSON.parse(
-          reader.result
+        const data =
+          JSON.parse(
+            reader.result
+          );
+
+
+        if(
+          !Array.isArray(data)
+        )
+          throw new Error();
+
+
+        matters =
+          data;
+
+
+        save();
+
+
+        alert(
+          "Import successful."
         );
 
+      }
+      catch{
 
-      if(
-        !Array.isArray(x)
-      )
-        throw new Error();
+        alert(
+          "That file isn't a valid Response Watch export."
+        );
 
+      }
 
-      matters = x;
-
-
-      save();
-
-
-      alert(
-        "Imported successfully."
-      );
-
-    }
-
-    catch{
-
-      alert(
-        "That file doesn't look like a Response Watch export."
-      );
-
-    }
-
-  };
+    };
 
 
   reader.readAsText(
@@ -2243,24 +3072,56 @@ function importData(ev){
   );
 
 
-  ev.target.value = "";
+  event.target.value =
+    "";
 
 }
 
 
-/* ----------------------------------
-   START
----------------------------------- */
+
+/* -----------------------------
+   INIT
+----------------------------- */
+
+
+function render(){
+
+  const active =
+    matters.filter(
+      m =>
+        !isResolved(m)
+    );
+
+
+  document
+    .getElementById(
+      "count"
+    )
+    .textContent =
+      `${active.length} active ${
+        active.length === 1
+          ? "matter"
+          : "matters"
+      }`;
+
+
+  renderWaiting();
+
+  renderChart();
+
+  renderMilestones();
+
+  renderCompleted();
+
+}
+
 
 render();
 
 
 /*
-  Re-render every second so:
-
-  - waiting timers update
-  - dashed graph segments grow
-  - total unresolved times update
+  Keep timers and the current
+  dashed waiting section live.
 */
 
 setInterval(
@@ -2271,17 +3132,19 @@ setInterval(
 
 /*
   Close modal when clicking
-  outside the modal box.
+  outside it.
 */
 
 document
-  .getElementById("modal")
+  .getElementById(
+    "modal"
+  )
   .addEventListener(
     "click",
-    e => {
+    event => {
 
       if(
-        e.target.id ===
+        event.target.id ===
         "modal"
       ){
 
