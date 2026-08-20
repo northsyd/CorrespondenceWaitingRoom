@@ -10,6 +10,222 @@ function saveMatter(){let org=document.getElementById('org').value.trim(),matter
 function render(){let active=matters.filter(m=>!isResolved(m));document.getElementById('count').textContent=`${active.length} active ${active.length===1?'matter':'matters'}`;let wc=document.getElementById('waitingCards');wc.innerHTML=active.length?'': '<div class="empty">Nothing currently waiting. Add a matter to start a timer.</div>';active.forEach(m=>{let s=lastSent(m),c=document.createElement('div');c.className='card';c.innerHTML=`<div class="card-top"><div><div class="org">${esc(m.org)}</div><div class="matter">${esc(m.matter)}</div></div><span class="status">${s?'WAITING':'NO EMAIL'}</span></div><div class="timer">${s?duration(Date.now()-new Date(s.at)):'—'}</div><div class="waitline">${s?'Since '+dt(s.at):'Add an outgoing email to start the timer.'}</div><div class="card-actions"><button class="small" onclick="openMatter('${m.id}')">Open timeline</button><button class="small secondary" onclick="openMatter('${m.id}')">+ Event</button><button class="small secondary" onclick="del('${m.id}')">Delete</button></div>`;wc.appendChild(c)});renderChart();renderMilestones();renderCompleted()}
 function renderMilestones(){let all=matters.flatMap(m=>m.events.map(e=>({...e,org:m.org,matter:m.matter}))).sort((a,b)=>new Date(b.at)-new Date(a.at)).slice(0,10),el=document.getElementById('milestones');el.innerHTML=all.length?all.map(e=>`<div class="event"><div class="event-date">${date(e.at)}<br>${new Date(e.at).toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit'})}</div><div><div class="event-title">${TYPES[e.type]} · ${esc(e.org)}</div><div class="event-note">${esc(e.note||e.matter)}</div></div></div>`).join(''):'<div class="empty">No milestones yet.</div>'}
 function renderCompleted(){let done=matters.filter(isResolved),el=document.getElementById('completed');el.innerHTML=done.length?done.map(m=>{let e=sorted(m),end=e.find(x=>x.type==='resolved')||last(m);return `<div class="completed-row"><div><strong>${esc(m.org)}</strong><div class="sub">${esc(m.matter)}</div></div><div>${date(e[0].at)} → ${date(end.at)}</div><div class="resolve">${duration(new Date(end.at)-new Date(e[0].at))}</div><button class="small secondary" onclick="openMatter('${m.id}')">Open</button></div>`}).join(''):'<div class="empty">No completed matters yet.</div>'}
-function renderChart(){let done=matters.filter(isResolved).slice(-8),el=document.getElementById('chart');if(!done.length){el.innerHTML='<div class="empty">Complete a matter to build the stacked response-time chart.</div>';return}let W=760,H=Math.max(190,done.length*48+55),L=175,R=25,T=25,B=35,bar=24,max=Math.max(...done.map(m=>new Date(last(m).at)-new Date(sorted(m)[0].at)),86400000),svg=`<svg viewBox="0 0 ${W} ${H}">`;done.forEach((m,i)=>{let e=sorted(m),y=T+i*48;svg+=`<text x="${L-10}" y="${y+17}" text-anchor="end" font-size="11" font-weight="700">${esc(m.org.slice(0,23))}</text>`;for(let j=0;j<e.length-1;j++){let a=new Date(e[j].at),b=new Date(e[j+1].at),ms=b-a,x=L+(a-new Date(e[0].at))/max*(W-L-R),w=Math.max(2,ms/max*(W-L-R));svg+=`<rect x="${x}" y="${y}" width="${w}" height="${bar}" rx="3" fill="${COLORS[e[j+1].type]||COLORS.other}"><title>${TYPES[e[j+1].type]}: ${duration(ms)}</title></rect>`}svg+=`<text x="${W-R}" y="${y+17}" text-anchor="end" font-size="10" fill="#697078">${duration(new Date(e.at(-1).at)-new Date(e[0].at))}</text>`});svg+=`</svg><div class="legend">${Object.entries(TYPES).filter(([k])=>['followup','response','meeting','call','resolved'].includes(k)).map(([k,v])=>`<span><i class="dot" style="background:${COLORS[k]}"></i>${v}</span>`).join('')}</div>`;el.innerHTML=svg}
+function renderChart(){
+  const all = matters.slice()
+    .sort((a,b) =>
+      new Date((lastEvent(b)||{}).at||0) -
+      new Date((lastEvent(a)||{}).at||0)
+    )
+    .slice(0,10);
+
+  const el = document.getElementById("chart");
+
+  if(!all.length){
+    el.innerHTML =
+      '<div class="empty">Add some matters to build the response-time chart.</div>';
+    return;
+  }
+
+  const W = 800;
+  const H = Math.max(210, all.length * 48 + 55);
+  const left = 185;
+  const right = 55;
+  const top = 25;
+  const bottom = 35;
+  const barH = 24;
+  const innerW = W - left - right;
+
+  const totals = all.map(m => {
+    const ev = sortedEvents(m);
+    if(!ev.length) return 0;
+
+    const end = isResolved(m)
+      ? new Date(ev.at(-1).at)
+      : new Date();
+
+    return end - new Date(ev[0].at);
+  });
+
+  const maxMs = Math.max(...totals, 86400000);
+
+  let svg = `
+    <svg viewBox="0 0 ${W} ${H}"
+         role="img"
+         aria-label="Stacked response time chart">
+
+    <defs>
+      <pattern id="waitHatch"
+               patternUnits="userSpaceOnUse"
+               width="10"
+               height="10"
+               patternTransform="rotate(45)">
+        <rect width="10" height="10" fill="#f7f3e9"></rect>
+        <line x1="0" y1="0"
+              x2="0" y2="10"
+              stroke="#697078"
+              stroke-width="3"></line>
+      </pattern>
+    </defs>
+  `;
+
+  all.forEach((m,i) => {
+    const ev = sortedEvents(m);
+    if(!ev.length) return;
+
+    const y = top + i * 48;
+    const firstTime = new Date(ev[0].at);
+
+    svg += `
+      <text x="${left-10}"
+            y="${y+17}"
+            text-anchor="end"
+            font-size="11"
+            font-weight="700">
+        ${esc(m.org.slice(0,25))}
+      </text>
+    `;
+
+    // Completed segments
+    for(let j=0; j<ev.length-1; j++){
+      const a = new Date(ev[j].at);
+      const b = new Date(ev[j+1].at);
+      const ms = b - a;
+
+      const x =
+        left +
+        ((a-firstTime) / maxMs) * innerW;
+
+      const width =
+        Math.max(2, (ms/maxMs) * innerW);
+
+      const fill =
+        COLORS[ev[j+1].type] || COLORS.other;
+
+      svg += `
+        <rect
+          x="${x.toFixed(1)}"
+          y="${y}"
+          width="${width.toFixed(1)}"
+          height="${barH}"
+          rx="3"
+          fill="${fill}">
+          <title>
+            ${TYPES[ev[j+1].type]}: ${duration(ms)}
+          </title>
+        </rect>
+      `;
+    }
+
+    // CURRENTLY WAITING — dashed / hatched
+    if(!isResolved(m)){
+      const sent = lastSent(m);
+
+      if(sent){
+        const a = new Date(sent.at);
+        const b = new Date();
+
+        const ms = Math.max(0, b-a);
+
+        const x =
+          left +
+          ((a-firstTime) / maxMs) * innerW;
+
+        const width =
+          Math.max(3, (ms/maxMs) * innerW);
+
+        svg += `
+          <rect
+            x="${x.toFixed(1)}"
+            y="${y}"
+            width="${width.toFixed(1)}"
+            height="${barH}"
+            rx="3"
+            fill="url(#waitHatch)"
+            stroke="#697078"
+            stroke-width="1.5"
+            stroke-dasharray="5 4">
+
+            <title>
+              Currently waiting: ${duration(ms)}
+            </title>
+
+          </rect>
+        `;
+      }
+    }
+
+    const end = isResolved(m)
+      ? new Date(ev.at(-1).at)
+      : new Date();
+
+    const total = end - firstTime;
+
+    svg += `
+      <text
+        x="${W-right}"
+        y="${y+17}"
+        text-anchor="end"
+        font-size="10"
+        fill="#697078">
+
+        ${duration(total)}
+
+      </text>
+    `;
+  });
+
+  svg += `
+    <line
+      x1="${left}"
+      x2="${W-right}"
+      y1="${H-bottom}"
+      y2="${H-bottom}"
+      stroke="#d9d1c2"/>
+
+    <text
+      x="${left}"
+      y="${H-10}"
+      font-size="10"
+      fill="#697078">
+
+      Matter started
+
+    </text>
+
+    <text
+      x="${W-right}"
+      y="${H-10}"
+      text-anchor="end"
+      font-size="10"
+      fill="#697078">
+
+      Now / resolved
+
+    </text>
+
+    </svg>
+  `;
+
+  el.innerHTML = svg + `
+    <div class="legend">
+
+      <span>
+        <i class="dot"
+           style="background:${COLORS.sent}"></i>
+        Completed
+      </span>
+
+      <span>
+        <i class="dot"
+           style="
+             background:#f7f3e9;
+             border:1px dashed #697078;
+           "></i>
+        Currently waiting
+      </span>
+
+    </div>
+  `;
+}
 function exportData(){let b=new Blob([JSON.stringify(matters,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='nsta-response-watch.json';a.click()}function importData(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!Array.isArray(x))throw 0;matters=x;save();alert('Imported successfully.')}catch{alert('Invalid Response Watch export.')}};r.readAsText(f);e.target.value=''}render();setInterval(render,30000);document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
 </script></body></html>
