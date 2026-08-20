@@ -1220,11 +1220,10 @@ function saveMatter(){
 
 
 /* WAITING */
-
 function renderWaiting(){
 
   const active =
-    matters.filter(isWaiting);
+    matters.filter(m => !isResolved(m));
 
   const el =
     document.getElementById("waitingCards");
@@ -1233,34 +1232,77 @@ function renderWaiting(){
   if(!active.length){
 
     el.innerHTML = `
-
       <div class="empty">
-
-        Nothing currently waiting.
-
-        <br>
-
-        A matter only appears here when
-        the latest event is an outgoing email.
-
+        Nothing currently active.
       </div>
-
     `;
 
     return;
-
   }
 
 
   el.innerHTML =
     active.map(m => {
 
-      const event =
-        waitingSince(m);
+      const events =
+        sortedEvents(m);
 
-      const elapsed =
-        Date.now() -
-        new Date(event.at);
+      const last =
+        events.at(-1);
+
+      const waiting =
+        isWaiting(m);
+
+      const statusText =
+        waiting
+          ? "WAITING"
+          : "IN PROGRESS";
+
+      const statusStyle =
+        waiting
+          ? ""
+          : `
+            style="
+              background:#dcecff;
+              color:#14527c;
+            "
+          `;
+
+
+      let elapsedText = "";
+      let elapsedLabel = "";
+
+
+      if(waiting){
+
+        elapsedText =
+          duration(
+            Date.now() -
+            new Date(last.at)
+          );
+
+        elapsedLabel =
+          `Waiting since ${fmtDateTime(last.at)}`;
+
+      }else{
+
+        /*
+          If they've responded but we haven't
+          resolved the matter, show how long
+          the matter has been open overall.
+        */
+
+        elapsedText =
+          duration(
+            Date.now() -
+            new Date(events[0].at)
+          );
+
+        elapsedLabel =
+          `Open since ${fmtDateTime(events[0].at)}`;
+
+      }
+
 
       return `
 
@@ -1280,39 +1322,64 @@ function renderWaiting(){
 
             </div>
 
-            <span class="status">
-              WAITING
+            <span
+              class="status"
+              ${statusStyle}
+            >
+              ${statusText}
             </span>
 
           </div>
 
 
           <div class="timer">
-            ${duration(elapsed)}
+            ${elapsedText}
           </div>
 
 
           <div class="waitline">
-            Since ${fmtDateTime(event.at)}
+            ${elapsedLabel}
           </div>
+
+
+          ${
+            last
+              ? `
+                <div
+                  class="sub"
+                  style="margin-top:8px;"
+                >
+                  Latest:
+                  <strong>
+                    ${esc(TYPES[last.type])}
+                  </strong>
+
+                  ${
+                    last.note
+                      ? ` · ${esc(last.note)}`
+                      : ""
+                  }
+                </div>
+              `
+              : ""
+          }
 
 
           <div class="card-actions">
 
             <button
               class="small"
-              onclick="openMatter('${m.id}')">
-
-              Open timeline
-
+              onclick="openMatter('${m.id}')"
+            >
+              Edit timeline
             </button>
+
 
             <button
               class="small secondary"
-              onclick="deleteMatter('${m.id}')">
-
+              onclick="deleteMatter('${m.id}')"
+            >
               Delete
-
             </button>
 
           </div>
